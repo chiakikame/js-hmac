@@ -1,0 +1,42 @@
+= js-hmac
+
+This program (webpage) shows how to do HMAC in javascript, with help of
+CryptoJS (https://code.google.com/p/crypto-js/) and jsSHA
+(https://github.com/Caligatio/jsSHA).
+
+== License
+
+The program (index.html) and this readme file is released under Do What
+The Fuck You Want To Public License, Version 2, as published by Sam Hocevar.
+It comes without any warranty, to the extent permitted by applicable law.
+
+CryptoJS and jsSHA has their respective license. For license of jsSHA,
+see lib/jsSHA/COPYING, or https://github.com/Caligatio/jsSHA/blob/master/LICENSE for detail. For license of CryptoJS, see lib/CryptoJS/COPYING or
+https://code.google.com/p/crypto-js/wiki/License for detail.
+
+== HMAC
+
+Hash-based message authentication code is a mechanism used widely in
+modern RESTful web applications.
+
+For more details, see https://en.wikipedia.org/wiki/Hash-based_message_authentication_code
+
+== CryptoJS
+
+CryptoJS (https://code.google.com/p/crypto-js/) is a javascript library with
+lots of crypto-related function. Unfortunately, the author have no time to
+maintain it...
+
+What's good about CryptoJS is that it has some independent encoding functions
+for use, including Base64, Hex, Utf-* ..
+
+== jsSHA
+
+jsSHA (https://github.com/Caligatio/jsSHA) is a javascript library providing
+SHA family functions and respective HMAC implementations.
+
+The library is easy to use, and can assign input and output format on hasher
+creation (in contrast to CryptoJS, which you should convert input and output
+into selected format via encoding classes provided in CryptoJS).
+
+However, in jsSHA, no independent encoders to be reused by other coders ..
