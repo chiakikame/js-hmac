@@ -1,0 +1,98 @@
+<!--
+Copyright © 2015 Chiaki Chikame <chiakikame@gmail.com>
+
+This program (index.html) is free. You can redistribute it and/or
+modify it under the terms of the Do What The Fuck You Want To Public
+License, Version 2, as published by Sam Hocevar.
+See http://www.wtfpl.net/ for more details.
+
+The libraries (jsSHA and CryptoJS) have their own respective licenses.
+See lib/jsSHA/COPYING and lib/CryptoJS/COPYING for details.
+
+==================
+
+In this file, performing HMAC with jsSHA and CryptoJS are demonstrated
+in the last <script> tag. Converting text into specific encoding before
+input to hasher is also demonstrated in this file.
+
+For more information about jsSHA, please see:
+* https://github.com/Caligatio/jsSHA
+* http://caligatio.github.io/jsSHA/
+
+For more information about CryptoJS, which is inactive now, please see:
+* https://code.google.com/p/crypto-js/
+
+-->
+<html>
+<body>
+<script src="lib/jsSHA/sha512.js"></script>
+<script src="lib/CryptoJS/hmac-sha512.js"></script>
+<script src="lib/CryptoJS/core-min.js"></script>
+<script src="lib/CryptoJS/enc-utf16-min.js"></script>
+<script>
+  var message = "豬頭"; //pig head
+  var passwd = "熊掌";  //bear claw
+  
+  console.log(message);
+  console.log(passwd);
+  
+  // By documentation, default text encoding is utf-8
+  console.log("CryptoJS-default");
+  var hash = CryptoJS.HmacSHA512(message, passwd);
+  var hash_str = CryptoJS.enc.Hex.stringify(hash);
+  console.log(hash_str);
+  
+  console.log("CryptoJS-utf8");
+  var utf8 = CryptoJS.enc.Utf8.parse
+  var hash = CryptoJS.HmacSHA512(utf8(message), utf8(passwd));
+  var hash_str = CryptoJS.enc.Hex.stringify(hash);
+  console.log(hash_str);
+  
+  console.log("CryptoJS-utf16be");
+  var utf16be = CryptoJS.enc.Utf16BE.parse
+  var hash = CryptoJS.HmacSHA512(utf16be(message), utf16be(passwd));
+  var hash_str = CryptoJS.enc.Hex.stringify(hash);
+  console.log(hash_str);
+  
+  console.log("CryptoJS-utf16le");
+  var utf16le = CryptoJS.enc.Utf16LE.parse
+  var hash = CryptoJS.HmacSHA512(utf16le(message), utf16le(passwd));
+  var hash_str = CryptoJS.enc.Hex.stringify(hash);
+  console.log(hash_str);
+
+  /**/
+  console.log("============================");
+  
+  // By documentation, default text encoding is utf-8
+  console.log("jsSHA-default");
+  var shaObj = new jsSHA("SHA-512", "TEXT");
+  shaObj.setHMACKey(passwd, "TEXT");
+  shaObj.update(message);
+  var hmac = shaObj.getHMAC("HEX");
+  console.log(hmac);
+
+  console.log("jsSHA-utf8");
+  var shaObj = new jsSHA("SHA-512", "TEXT", {encoding: "UTF8"});
+  shaObj.setHMACKey(passwd, "TEXT", {encoding: "UTF8"});
+  shaObj.update(message);
+  var hmac = shaObj.getHMAC("HEX");
+  console.log(hmac);
+  
+  console.log("jsSHA-utf16be");
+  var shaObj = new jsSHA("SHA-512", "TEXT", {encoding: "UTF16BE"});
+  shaObj.setHMACKey(passwd, "TEXT", {encoding: "UTF16BE"});
+  shaObj.update(message);
+  var hmac = shaObj.getHMAC("HEX");
+  console.log(hmac);
+  
+  console.log("jsSHA-utf16le");
+  var shaObj = new jsSHA("SHA-512", "TEXT", {encoding: "UTF16LE"});
+  shaObj.setHMACKey(passwd, "TEXT", {encoding: "UTF16LE"});
+  shaObj.update(message);
+  var hmac = shaObj.getHMAC("HEX");
+  console.log(hmac);
+</script>
+<p>Call your console window of the browser for output.</p>
+<p>(In Firefox, use Ctrl + Shift + C)</p>
+</body>
+</html>
